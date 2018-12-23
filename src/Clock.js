@@ -7,7 +7,11 @@ class Clock extends Component {
         console.log(hour);
         return(
             <div className="js-clock">
-                <h1 className="js-title">{hour}:{min}:{sec}</h1>
+                <h1 className="js-title">
+                    {hour < 10 ? '0'+hour : hour}
+                    :{min < 10 ? '0'+min : min}
+                    :{sec < 10 ? '0'+sec : sec}
+                </h1>
             </div>
         );
     }

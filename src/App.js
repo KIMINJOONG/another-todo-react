@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Clock from './Clock';
+import TodoInput from './TodoForm';
 
 class App extends Component {
 
@@ -35,6 +36,7 @@ class App extends Component {
           min={date.getMinutes()}
           sec={date.getSeconds()}
           />
+          <TodoInput />
       </div>
     );
   }
