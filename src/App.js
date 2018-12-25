@@ -1,42 +1,65 @@
 import React, { Component } from 'react';
-import './App.css';
-import Clock from './Clock';
-import TodoInput from './TodoForm';
+import TodoListTemplate from './components/TodoListTemplate'
+import Form from './components/Form';
+import TodoItemList from './components/TodoItemList';
 
 class App extends Component {
-
-  constructor(props) {
-    super(props)
-    this.state ={date: new Date()}
+  id = 1
+  state = {
+    name: ''
+    , dos: ''
+    , information: [
+      {
+        id: 0
+        , name: '김인중'
+        , phone: '01077494452'
+      }
+    ]
   }
 
-  componentDidMount() {
-      this.timeID = setInterval(
-          () => this.change(),
-          1000
-      )
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name] : e.target.value
+    });
+  }
+  handleCreate = (data) => {
+    const {information} = this.state;
+    this.setState({
+      information: information.concat({id: this.id++, ...data})
+    });
   }
 
-  componentWillUnmount(){
-      clearInterval(this.timeID)
-  }
-
-  change = () => {
-      this.setState({
-          date: new Date()
-      });
+  handleKeyPress = (e) => {
+    if(e.key === 'Enter') {
+      this.handleCreate();
+    }
   }
 
   render() {
-    const { date } = this.state;
+    const { name, dos, information } = this.state;
+    const {
+      handleChange
+      , handleCreate
+      , handleKeyPress
+    } = this;
     return (
-      <div className="container">
-        <Clock 
-          hour={date.getHours()}
-          min={date.getMinutes()}
-          sec={date.getSeconds()}
-          />
-          <TodoInput />
+      <div>
+        <TodoListTemplate 
+          time="11:55:30" 
+          form={
+            <Form
+              name={name}
+              dos={dos}
+              onKeyPress={handleKeyPress}
+              onChange={handleChange}
+              onCreate={handleCreate}
+            />
+          }
+          children={<TodoItemList />}
+          >
+          {JSON.stringify(information)}
+          
+        </TodoListTemplate>
       </div>
     );
   }
