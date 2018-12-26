@@ -2,15 +2,17 @@ import React, { Component } from 'react';
 import TodoItem from './TodoItem';
 
 class TodoItemList extends Component {
+    static defaultProps = {
+        data: []
+    }
     render() {
-        return(
-            
+        const { data } = this.props;
+        const list = data.map(
+            info => (<TodoItem key={info.id} info={info} />)
+        );
+        return(    
             <div>
-                <TodoItem 
-                    id="1"
-                    name="안녕"
-                    dos="할 일"
-                />
+                {list}
             </div>
         );
     }

@@ -12,7 +12,7 @@ class App extends Component {
       {
         id: 0
         , name: '김인중'
-        , phone: '01077494452'
+        , dos: '01077494452'
       }
     ]
   }
@@ -22,10 +22,14 @@ class App extends Component {
       [e.target.name] : e.target.value
     });
   }
-  handleCreate = (data) => {
-    const {information} = this.state;
+  handleCreate = () => {
+    const { information, name, dos } = this.state;
     this.setState({
-      information: information.concat({id: this.id++, ...data})
+      information: information.concat({
+        id: this.id++,
+        name: name
+        , dos : dos
+      })
     });
   }
 
@@ -55,10 +59,8 @@ class App extends Component {
               onCreate={handleCreate}
             />
           }
-          children={<TodoItemList />}
+          children={<TodoItemList data={information} />}
           >
-          {JSON.stringify(information)}
-          
         </TodoListTemplate>
       </div>
     );
