@@ -10,7 +10,6 @@ class TodoItem extends Component {
     }
     render() {
         const { id, name, dos } = this.props.info;
-        console.log({name});
         return(
             <div>
                 <div id={id}>

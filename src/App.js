@@ -17,6 +17,7 @@ class App extends Component {
     ]
   }
 
+
   handleChange = (e) => {
     this.setState({
       [e.target.name] : e.target.value
@@ -31,12 +32,26 @@ class App extends Component {
         , dos : dos
       })
     });
+    this.saveTodos({information});
+  }
+
+  saveTodos = (information) => {
+    localStorage.setItem("toDos", JSON.stringify(information));
+    console.log(localStorage.getItem("toDos"));
+    this.handleLoadToDos();
   }
 
   handleKeyPress = (e) => {
     if(e.key === 'Enter') {
       this.handleCreate();
     }
+  }
+
+  handleLoadToDos = () => {
+    
+     
+    console.log(localStorage.getItem("todos"));
+    
   }
 
   render() {
